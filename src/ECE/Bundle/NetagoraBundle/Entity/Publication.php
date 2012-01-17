@@ -251,8 +251,4 @@ class Publication
     {
         return $this->isFavorite;
     }
-    
-    public function savePublications(){
-        
-    }
 }
