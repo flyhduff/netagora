@@ -592,6 +592,7 @@ pre {
   display: block;
   float: left;
   font-size: 13px;
+  height: 40px;
 }
 
 .topbar ul li a {
