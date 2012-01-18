@@ -122,21 +122,9 @@ class ConnectedController extends Controller
      */
     public function locationSitesAction()
     {
-       $name = 'location';
-       $user = new User();
-       $network = "t";
-       $social_buttons = $user->getSocialButtons($network,'158903826945024000');
-       $networking = 'twitter';
-       $feed_author = 'me';
-       $feed_author_url = 'http://facebook.com';
-       $display = 'display';
-       $link_url ='http://bla.ca';
-       $link = 'mylink';
-       $feed_text = 'content';
-       $category = 'video';
-        $avatar_url = 'https://si0.twimg.com/profile_images/1547581423/moy_reasonably_small.png';
-              
-       return array('name' => $name, 'feed_author' => $feed_author, 'feed_author_url' => $feed_author_url, 'display' => $display, 'link_url' => $link_url, 'link' => $link, 'feed_text' => $feed_text, 'networking' => $networking, 'social_buttons' => $social_buttons, 'avatar_url' => $avatar_url);
+        $name = 'location';
+         $avatar_url = 'https://si0.twimg.com/profile_images/1547581423/moy_reasonably_small.png';
+        return array('name' => $name);
     }
     
     /**
@@ -167,23 +155,10 @@ class ConnectedController extends Controller
      */
     public function feedsAction()
     {
-       $name = 'location';
-       $user = new User();
-       $network = "t";
-       $social_buttons = $user->getSocialButtons($network,'158903826945024000');
-       $networking = 'twitter';
-       $feed_author = 'me';
-       $feed_author_url = 'http://facebook.com';
-       $display = 'display';
-       $link_url ='http://bla.ca';
-       $link = 'mylink';
-       $feed_text = 'content';
-       $category = 'video';
-        $avatar_url = 'https://si0.twimg.com/profile_images/1547581423/moy_reasonably_small.png';
-              
-       return array('name' => $name, 'feed_author' => $feed_author, 'feed_author_url' => $feed_author_url, 'display' => $display, 'link_url' => $link_url, 'link' => $link, 'feed_text' => $feed_text, 'networking' => $networking, 'social_buttons' => $social_buttons, 'avatar_url' => $avatar_url);
-       
-       }
+        $name = 'feeds';
+         $avatar_url = 'https://si0.twimg.com/profile_images/1547581423/moy_reasonably_small.png';
+        return array('name' => $name);
+    }
     
     /**
      * @Route("/Favourites")
