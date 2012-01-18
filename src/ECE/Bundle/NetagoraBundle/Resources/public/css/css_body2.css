@@ -1622,3 +1622,156 @@ p.text{
 	/* ******* ******* ONE FEED WILL LOOK LIKE THIS THANKS TO THE FOLLOWING ******* ******* */
 
 /* ******* ******* END ***** FEEDS CONTAINER ******* ******* */
+
+/* ******* ******* START *** FORM PROFILE ****** */
+.division{
+	
+	background-color: #FFEFD9;
+	border-bottom: 2px solid #FFEFD9;
+	margin-bottom: 30px;
+}
+form#profile .avatar{
+	float: left;
+	margin: 0 10px;
+	
+}
+form#profile .avatar img{
+	width: 80px;
+	height: 80px;
+	-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+	-moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+}
+form#profile, form#subscribe {
+	position: absolute;
+	top: 40px;
+	width: 600px;
+	margin: auto 200px;
+	background: #b7b2b1;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	padding: 20px;
+
+}
+/* We will also remove the border from the fieldset and apply some bottom margin to it. Using the :last-of-type pseudo-class, we remove the bottom margin of the last fieldset — there is no need for it */
+form#profile fieldset,form#subscribe fieldset {
+	border: none;
+	margin-bottom: 10px;
+}
+form#profile fieldset:last-of-type, form#subscribe fieldset:last-of-type{
+margin-bottom: 0;
+}
+/* Next we’ll make the legends big and bold, and we will also apply a light-green text-shadow, to add that little extra special detail: */
+form#profile legend,form#subscribe legend {
+	color: #eae5df;
+	font-size: 3em;
+	padding-bottom: 30px;
+	text-shadow: 0 1px 1px #c0d576;
+}
+/* Finally, we need to change the style of the legend that is part of the radio buttons group, to make it look like a label: */
+form#profile fieldset fieldset legend, form#subscribe fieldset fieldset legend{
+	font-size: 1.1em;
+	font-weight: normal;
+	padding-bottom: 0;
+}
+/* For our list elements, we’ll just add some nice rounded corners and semi-transparent border and background. Because we are using RGBa colors, we should provide a fallback for browsers that don’t support them (that comes before the RBGa color). For the nested lists, we will remove these properties because they would be overlapping: */
+form#profile ol li, form#subscribe ol li {
+	line-height: 30px;
+	list-style: none;
+	padding: 5px 10px;
+	margin-bottom: 2px;
+}
+form#profile ol ol li,form#subscribe ol ol li {
+	background: none;
+	border: none;
+	float: left;
+}
+/* Now we only need to style our labels, inputs and the button element.
+
+All our labels will look the same, with the exception of the one for the radio elements. We will float them to the left and give them a width.
+
+For the credit card type labels, we will add an icon as the background, and override some of the properties that aren’t necessary. We will be using the attribute selector to specify the background image for each label — in this case, we use the for attribute of each label.
+
+To add an extra user-friendly detail, we’ll add a cursor: pointer to the radio button labels on the :hover state, so the user knows that he can simply click them to select that option. */
+form#profile label, form#subscribe label{
+	float: left;
+	margin: 8px 30px;
+	font-size: 1.1em;
+	font-weight: bold;
+	width: 100px;
+}
+form#profile fieldset fieldset label:hover, form#subscribe fieldset fieldset label:hover {
+cursor: pointer;
+}
+/*Almost there! Now onto the input elements. Here we want to match all inputs, except for the radio ones, and the textarea. For that we will use the negation pseudo-class (:not()). With it we can target all input elements except for the ones with type of radio.
+
+We will also make sure to add some :focus styles and add the appropriate styling for the radio inputs:
+*/
+form#profile input:not([type=radio]),
+form#profile textarea, form#subscribe input:not([type=radio]), form#subscribe textarea {
+	background: #eae5df;
+	border: none;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	-khtml-border-radius: 3px;
+	border-radius: 3px;
+	outline: none;
+	padding: 5px;
+	width: 200px;
+}
+form#profile input:not([type=submit]):focus,
+form#profile textarea:focus, form#subscribe input:not([type=submit]):focus, form#subscribe textarea:focus {
+	background: #eaeaea;
+}
+/* And finally we come to our submit button. To it, we will just add some nice typography and text-shadow, align it to the center of the form and give it some background colors for its different states: */
+form#profile button, form#subscribe button{
+	border: none;
+	-moz-border-radius: 20px;
+	-webkit-border-radius: 20px;
+	-khtml-border-radius: 20px;
+	border-radius: 20px;
+	
+	display: block;
+	
+	font-size: 1em;
+	color: #FFEFD9;	
+	letter-spacing: 1px;
+	text-shadow: 0 1px 1px #000000;
+
+	margin: auto;
+	padding: 7px 20px;
+	
+	background: #591023;
+	background-color: #591023;
+	background-repeat: repeat-x;
+	background-image: -khtml-gradient(linear, left top, left bottom, from(#7F1732), to(#591023));
+	background-image: -moz-linear-gradient(top, #7F1732, #591023);
+	background-image: -ms-linear-gradient(top, #7F1732, #591023);
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #7F1732), color-stop(100%, #591023));
+	background-image: -webkit-linear-gradient(top, #7F1732, #591023);
+	background-image: -o-linear-gradient(top, #7F1732, #591023);
+	background-image: linear-gradient(top, #7F1732, #591023);
+	
+	-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+	-moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+}
+form#profile button:hover,form#subscribe button:hover{
+	background: #7F1732;
+	background-color: #7F1732;
+	background-repeat: repeat-x;
+	background-image: -khtml-gradient(linear, left top, left bottom, from(#591023), to(#7F1732));
+	background-image: -moz-linear-gradient(top, #591023, #7F1732);
+	background-image: -ms-linear-gradient(top, #591023, #7F1732);
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #591023), color-stop(100%, #7F1732));
+	background-image: -webkit-linear-gradient(top, #591023, #7F1732);
+	background-image: -o-linear-gradient(top, #591023, #7F1732);
+	background-image: linear-gradient(top, #591023, #7F1732);
+	
+	-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+	-moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+	
+	cursor: pointer;
+}

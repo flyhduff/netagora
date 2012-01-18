@@ -1,49 +1,35 @@
-{% extends "ECENetagoraBundle::layout.html.twig" %}
+{% extends "ECENetagoraBundle::menu_notlogged.html.twig" %}
 
 {% block content %}
-    <h1>Subscribe !</h1>
-    <h2>Fill the form to subscribe to NetAgora</h2>
 
-    <form action="{{ path('subscribe') }}" method="post" {{ form_enctype(form) }}>
-        {#{{ form_widget(form) }} #}
-            {{ form_label(form.username) }}
-            {{ form_widget(form.username) }}
-            {{ form_errors(form.username) }}
-            <br />
-            {{ form_label(form.email) }}
-            {{ form_widget(form.email) }}
-            {{ form_errors(form.email) }}
-            <br />
-            {{ form_label(form.password) }}
-            {{ form_widget(form.password) }}
-            {{ form_errors(form.password) }}
-            <br />
-            {{ form_label(form.file) }}
-            {{ form_widget(form.file) }}
-            {{ form_errors(form.file) }}
-            <br />
-            {{ form_label(form.location) }}
-            {{ form_widget(form.location) }}
-            {{ form_errors(form.location) }}
-            <br />
-            {{ form_label(form.firstName) }}
-            {{ form_widget(form.firstName) }}
-            {{ form_errors(form.firstName) }}
-            <br />
-            {{ form_label(form.lastName) }}
-            {{ form_widget(form.lastName) }}
-            {{ form_errors(form.lastName) }}
-            <br />
-            <div id="birthdate_label">
-            {{ form_label(form.birthdate) }}
-            </div>
-            {{ form_widget(form.birthdate)}}
-            {{ form_errors(form.birthdate) }}
-        
-        {{ form_rest(form) }}
-        <p>
-            <button type="submit">Create</button>
-        </p>
+    <form id="subscribe">
+    	<fieldset>
+    		<legend class="subtitle">Subscribe</legend>
+    		<ol>
+    			<li>
+    				<label for=username>Pseudo</label>
+    				<input id=username name=username type=text placeholder="Enter your username" required autofocus>
+    			</li>
+    			<li>
+    				<label for=email>Email</label>
+    				<input id=email name=email type=email placeholder="Enter your mail address" required>
+    			</li>
+       			<li>
+    				<label for=phone>Password</label>
+    				<input id=pass name=pass type=password placeholder="">
+    			</li>
+    			<li>
+    				<label for=phone>Confirm password</label>
+    				<input id=passconfirm name=passconfirm type=password placeholder="">
+    			</li>
+			</ol>
+       	</fieldset>
+    	    	
+     	<div class="division"></div>
+ 
+      	<fieldset>
+    		<button type=submit>Register</button>
+    	</fieldset>
     </form>
-
+        
 {% endblock %}
