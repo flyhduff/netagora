@@ -264,6 +264,20 @@ class ConnectedController extends Controller
         
     }
     
+    
+    /**
+     * @Route("/Settings")
+     * @Template()
+     */
+    public function settingsAction()
+    {   
+       
+       $name = 'settings';
+        $avatar_url = 'https://si0.twimg.com/profile_images/1547581423/moy_reasonably_small.png';
+       return array('name' => $name);
+       
+    }
+    
     /** 
     * @Route("/connectTwitter", name="connect_twitter")
     *
