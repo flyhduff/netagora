@@ -1101,6 +1101,12 @@ ul#navigation .home a{
 	
 }
 
+.grey_bg .subtitle{
+	
+	color: #eae5df;
+	
+}
+
 #bottom_body .middle{
 	
 	margin: 0 20px;
@@ -1187,7 +1193,7 @@ ul#navigation .home a{
 	
 	margin: 100px;
 	margin-bottom: 20px;
-	height: 600px;
+	min-height: 600px;
 	color: #591023;
 	overflow: auto;	
 }
@@ -1644,7 +1650,8 @@ form#profile .avatar img{
 	-moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
 	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
 }
-form#profile, form#subscribe, form#settings {
+form#profile, form#subscribe, form#settings, form#password_retrieval,
+form#search {
 	position: absolute;
 	top: 40px;
 	width: 600px;
@@ -1659,19 +1666,25 @@ form#profile, form#subscribe, form#settings {
 /* We will also remove the border from the fieldset and apply some bottom margin to it. Using the :last-of-type pseudo-class, we remove the bottom margin of the last fieldset — there is no need for it */
 form#profile fieldset,
 form#subscribe fieldset,
-form#settings fieldset{
+form#settings fieldset,
+form#password_retrieval fieldset,
+form#search fieldset{
 	border: none;
 	margin-bottom: 10px;
 }
 form#profile fieldset:last-of-type,
 form#subscribe fieldset:last-of-type,
-form#settings fieldset:last-of-type{
+form#settings fieldset:last-of-type,
+form#password_retrieval fieldset:last-of-type,
+form#search fieldset:last-of-type{
 margin-bottom: 0;
 }
 /* Next we’ll make the legends big and bold, and we will also apply a light-green text-shadow, to add that little extra special detail: */
 form#profile legend,
 form#subscribe legend,
-form#settings legend{
+form#settings legend,
+form#password_retrieval legend,
+form#search legend{
 	color: #eae5df;
 	font-size: 3em;
 	padding-bottom: 30px;
@@ -1680,7 +1693,9 @@ form#settings legend{
 /* Finally, we need to change the style of the legend that is part of the radio buttons group, to make it look like a label: */
 form#profile fieldset fieldset legend,
 form#subscribe fieldset fieldset legend,
-form#settings fieldset fieldset legend{
+form#settings fieldset fieldset legend,
+form#password_retrieval fieldset fieldset legend,
+form#search fieldset fieldset legend{
 	font-size: 1.1em;
 	font-weight: normal;
 	padding-bottom: 0;
@@ -1688,7 +1703,9 @@ form#settings fieldset fieldset legend{
 /* For our list elements, we’ll just add some nice rounded corners and semi-transparent border and background. Because we are using RGBa colors, we should provide a fallback for browsers that don’t support them (that comes before the RBGa color). For the nested lists, we will remove these properties because they would be overlapping: */
 form#profile ol li,
 form#subscribe ol li,
-form#settings ol li{
+form#settings ol li,
+form#password_retrieval ol li,
+form#search ol li{
 	line-height: 30px;
 	list-style: none;
 	padding: 5px 10px;
@@ -1696,7 +1713,9 @@ form#settings ol li{
 }
 form#profile ol ol li,
 form#subscribe ol ol li,
-form#settings ol ol li{
+form#settings ol ol li,
+form#password_retrieval ol ol li,
+form#search ol ol li{
 	background: none;
 	border: none;
 	float: left;
@@ -1710,7 +1729,9 @@ For the credit card type labels, we will add an icon as the background, and over
 To add an extra user-friendly detail, we’ll add a cursor: pointer to the radio button labels on the :hover state, so the user knows that he can simply click them to select that option. */
 form#profile label,
 form#subscribe label,
-form#settings label{
+form#settings label,
+form#password_retrieval label,
+form#search label{
 	float: left;
 	margin: 8px 30px;
 	font-size: 1.1em;
@@ -1719,7 +1740,9 @@ form#settings label{
 }
 form#profile fieldset fieldset label:hover,
 form#subscribe fieldset fieldset label:hover,
-form#settings fieldset fieldset label:hover{
+form#settings fieldset fieldset label:hover,
+form#password_retrieval fieldset fieldset label:hover,
+form#search fieldset fieldset label:hover{
 cursor: pointer;
 }
 /*Almost there! Now onto the input elements. Here we want to match all inputs, except for the radio ones, and the textarea. For that we will use the negation pseudo-class (:not()). With it we can target all input elements except for the ones with type of radio.
@@ -1731,7 +1754,11 @@ form#profile textarea,
 form#subscribe input:not([type=radio]),
 form#subscribe textarea,
 form#settings textarea,
-form#settings input:not([type=radio]){
+form#settings input:not([type=radio]),
+form#password_retrieval textarea,
+form#password_retrieval input:not([type=radio]),
+form#search textarea,
+form#search input:not([type=radio]){
 	background: #eae5df;
 	border: none;
 	-moz-border-radius: 3px;
@@ -1747,13 +1774,19 @@ form#profile textarea:focus,
 form#subscribe input:not([type=submit]):focus,
 form#subscribe textarea:focus,
 form#settings input:not([type=submit]):focus,
-form#settings textarea:focus{
+form#settings textarea:focus,
+form#password_retrieval input:not([type=submit]):focus,
+form#password_retrieval textarea:focus,
+form#search input:not([type=submit]):focus,
+form#search textarea:focus{
 	background: #eaeaea;
 }
 /* And finally we come to our submit button. To it, we will just add some nice typography and text-shadow, align it to the center of the form and give it some background colors for its different states: */
 form#profile button,
 form#subscribe button,
-form#settings button{
+form#settings button,
+form#password_retrieval button,
+form#search button{
 	border: none;
 	-moz-border-radius: 20px;
 	-webkit-border-radius: 20px;
@@ -1787,7 +1820,9 @@ form#settings button{
 }
 form#profile button:hover,
 form#subscribe button:hover,
-form#settings button:hover{
+form#settings button:hover,
+form#password_retrieval button:hover,
+form#search button:hover{
 	background: #7F1732;
 	background-color: #7F1732;
 	background-repeat: repeat-x;
@@ -1804,4 +1839,38 @@ form#settings button:hover{
 	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
 	
 	cursor: pointer;
+}
+
+/* ****** GREY BG ON PAGE ******* */
+.grey_bg{
+		
+	position: absolute;
+	top: 40px;
+	width: 600px;
+	margin: auto 200px;
+	background: #b7b2b1;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	padding: 20px;
+
+}
+
+#badges{
+	
+	margin: 20px;
+	
+}
+
+#badges img{
+	
+	margin: 10px;
+	
+}
+
+.search{
+	
+	margin-top: 340px;
+	margin-bottom: 50px;
+	
 }
