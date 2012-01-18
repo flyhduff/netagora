@@ -319,4 +319,23 @@ class ConnectedController extends Controller
         return $response;
 
     }
+
+/** 
+    * @Route("/connectFacebook", name="connect_facebook")
+    *
+    */
+    public function connectFacebookAction()
+    {   
+        
+        $request = $this->get('request');
+        $facebook = $this->get('fos_facebook.service');
+
+        $authURL = $facebook->getLoginUrl($request);
+        $response = new RedirectResponse($authURL);
+
+        return $response;
+
+    }
+
+
 }

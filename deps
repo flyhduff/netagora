@@ -80,7 +80,7 @@
     git=https://github.com/FriendsOfSymfony/FOSTwitterBundle.git
     target=/bundles/FOS/TwitterBundle
     version=v1.0
-
+     
 [BuzzBundle]
     git=https://github.com/sensio/SensioBuzzBundle.git
     target=/bundles/Sensio/Bundle/BuzzBundle

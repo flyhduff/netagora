@@ -64,7 +64,7 @@ fos_twitter:
     consumer_key: Huzq3JiVnckweiDIDlhpxg
     consumer_secret: 5bNkZddwISgRSZIKMP1LGAuKECyKN04SZ4cBsiRkhr0
     callback_url: http://netagora.hugohamon.com/twitter/login_check
-    
+
 #my.twitter.user:
 #    class: ECE\netagoraBundle\Security\User\Provider\TwitterProvider
 #    arguments:
@@ -72,6 +72,14 @@ fos_twitter:
 #        userManager: "@fos_user.user_manager"
 #        validator: "@validator"
 #        session: "@session"
+
+fos_facebook:
+    file: %kernel.root_dir%/../vendor/facebook/src/base_facebook.php
+    alias: facebook
+    app_id: 157952174313665
+    secret: 9c3f8ab5c7d332bbdaccbbb8d9823a0d
+    cookie: true
+    permissions: [email, read_stream]
 
 fos_user:
     db_driver:     orm

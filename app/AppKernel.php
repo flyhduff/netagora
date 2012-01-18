@@ -19,6 +19,7 @@ class AppKernel extends Kernel
             new Sensio\Bundle\BuzzBundle\SensioBuzzBundle(),
             new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
             new FOS\TwitterBundle\FOSTwitterBundle(),
+            new FOS\FacebookBundle\FOSFacebookBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new ECE\Bundle\NetagoraBundle\ECENetagoraBundle(),
         );

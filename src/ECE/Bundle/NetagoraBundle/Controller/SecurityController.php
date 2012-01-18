@@ -32,4 +32,33 @@ class SecurityController extends Controller
     {
         
     }
+    
+}
+
+/** 
+ * @Route("/facebook")
+ *
+ */
+class SecurityController extends Controller
+{
+    /** 
+     * @Route("/login", name="facebook_login")
+     *
+     */
+    public function loginAction(Request $request)
+    {
+        $facebook = $this->get('fos_facebook.service');
+
+        return $this->redirect($facebook->getLoginUrl($request));
+    }
+
+    /** 
+     * @Route("/login_check", name="facebook_login_check")
+     *
+     */
+    public function loginCheckAction()
+    {
+        
+    }
+    
 }
