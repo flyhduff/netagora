@@ -327,6 +327,18 @@ class ConnectedController extends Controller
 	   $name = 'badges';
 	   return array('name' => $name);
 	   
+	}  
+	
+	/**
+	 * @Route("/DisplayMessage")
+	 * @Template()
+	 */
+	public function displayMessageAction()
+	{   
+	   
+	   $message = 'message';
+	   return array('message' => $message);
+	   
 	}    
     
     /** 

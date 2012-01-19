@@ -102,4 +102,16 @@ class DisconnectedController extends Controller
         $name = 'ForgotPassword';
         return array('name' => $name);
     }
+
+/**
+ * @Route("/Message")
+ * @Template()
+ */
+public function messageAction()
+{
+    $message = 'Message';
+    return array('message' => $message);
+}
+
+
 }
