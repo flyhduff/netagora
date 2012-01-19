@@ -37,4 +37,14 @@ class ProjectController extends Controller
         $name = 'about';
         return array('name' => $name);
     }
+    
+    /**
+     * @Route("/Resources")
+     * @Template()
+     */
+    public function resourcesAction()
+    {
+        $name = 'resources';
+        return array('name' => $name);
+    }
 }
