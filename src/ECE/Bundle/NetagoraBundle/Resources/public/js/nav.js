@@ -107,6 +107,83 @@ $(document).ready(function () {
 				}
 			);
 			
+			$("#home_videos .close").click(function () { 
+			    $("#home_videos").fadeOut();
+			    $("#video_m").fadeIn();
+			    
+			});
+			  
+			$("#video_m").click(function () { 
+			      $("#home_videos").fadeIn();
+			      $("#video_m").fadeOut();
+			});
+			
+			$("#home_music .close").click(function () { 
+			    $("#home_music").fadeOut();
+			    $("#music_m").fadeIn();
+			    
+			});
+			  
+			$("#music_m").click(function () { 
+			      $("#home_music").fadeIn();
+			      $("#music_m").fadeOut();
+			});
+			
+			$("#home_pictures .close").click(function () { 
+			    $("#home_pictures").fadeOut();
+			    $("#picture_m").fadeIn();
+			    
+			});
+			  
+			$("#picture_m").click(function () { 
+			      $("#home_pictures").fadeIn();
+			      $("#picture_m").fadeOut();
+			});
+			
+			$("#home_locations .close").click(function () { 
+			    $("#home_locations").fadeOut();
+			    $("#location_m").fadeIn();
+			    
+			});
+			  
+			$("#location_m").click(function () { 
+			      $("#home_locations").fadeIn();
+			      $("#location_m").fadeOut();
+			});
+			
+			$("#home_other .close").click(function () { 
+			    $("#home_other").fadeOut();
+			    $("#other_m").fadeIn();
+			    
+			});
+			  
+			$("#other_m").click(function () { 
+			      $("#home_other").fadeIn();
+			      $("#other_m").fadeOut();
+			});
+			
+			$("#home_feeds .close").click(function () { 
+			    $("#home_feeds").fadeOut();
+			    $("#feed_m").fadeIn();
+			    
+			});
+			  
+			$("#feed_m").click(function () { 
+			      $("#home_feeds").fadeIn();
+			      $("#feed_m").fadeOut();
+			});
+			
+			$("#home_favourites .close").click(function () { 
+			    $("#home_favourites").fadeOut();
+			    $("#favourite_m").fadeIn();
+			    
+			});
+			  
+			$("#favourite_m").click(function () { 
+			      $("#home_favourites").fadeIn();
+			      $("#favourite_m").fadeOut();
+			});
+						
 			$(function() {
 			
 			 $('#navigation a').stop().animate({'marginLeft':'-55px'},1000);
@@ -130,4 +207,7 @@ $(document).ready(function () {
 		  }
 		 );
 		});
+		
+		
+		
 });

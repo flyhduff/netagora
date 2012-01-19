@@ -1439,10 +1439,17 @@ p.text{
 
 .cat_to_ad{
 	
-	font-size: 2em;
+	font-size: 1.4em;
 	text-shadow: 1px 1px 1px rgba(255,255,255,0.3);
 	cursor: pointer;
 }
+
+#video_m, #picture_m, #music_m, #location_m, #other_m, #feed_m, #favourite_m, #profile_m{
+	
+	
+	display: none;
+}
+
 
 /* ******* ******* START ***** FEEDS CONTAINER ******* ******* */
 	/* ******* ******* START ***** */
