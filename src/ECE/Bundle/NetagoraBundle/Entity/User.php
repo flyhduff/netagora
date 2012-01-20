@@ -4,7 +4,8 @@ namespace ECE\Bundle\NetagoraBundle\Entity;
 
 use FOS\UserBundle\Entity\User as BaseUser;
 use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
 
 /**
  * ECE\Bundle\NetagoraBundle\Entity\User
@@ -29,16 +30,19 @@ class User extends BaseUser
     
     /**
      * @var string $firstName
+     * 
      */
     private $firstName;
     
     /**
      * @var string $lastName
+     * 
      */
     private $lastName;
     
     /**
      * @var datetime $birthdate
+     * 
      */
     private $birthdate;
     
@@ -68,19 +72,44 @@ class User extends BaseUser
 
     private $tokens;
 
-    /**
-     * @Assert\Image(maxSize="1M")
-     */
     public $file;
+    public $target;
 
     function __construct()
     {
         parent::__construct();
+
         $this->lastLoginAt = new \DateTime();
         $this->registeredAt = new \DateTime();
         $this->categories = new ArrayCollection();
         $this->publications = new ArrayCollection();
         $this->tokens = new ArrayCollection();
+    }
+
+    public function encodePassword(PasswordEncoderInterface $encoder)
+    {
+        $password = $encoder->encodePassword(
+            $this->getPassword(),
+            $this->getSalt()
+        );
+
+        $this->salt = md5(uniqid().'*'.time().'|'.rand(0, 999999));
+        $this->setPassword($password);
+    }
+
+    public function preUpload()
+    {
+        if ($this->file instanceOf UploadedFile) {
+            $this->path = $this->username.'.'.$this->file->guessExtension();
+        }
+    }
+
+    public function upload()
+    {
+        if ($this->file instanceOf UploadedFile) {
+            $this->file->move($this->target, $this->path);
+            $this->file = null;
+        }
     }
 
     /**
@@ -392,66 +421,34 @@ class User extends BaseUser
         return $this->twitterUsername;
     }
 
-    public function getAbsolutePath()
-    {
-        return null === $this->picture ? null : $this->getUploadRootDir().'/'.$this->picture;
-    }
-
-    public function getWebPath()
-    {
-        return null === $this->picture ? null : $this->getUploadDir().'/'.$this->picture;
-    }
-
-    protected function getUploadRootDir()
-    {
-        // the absolute directory path where uploaded documents should be saved
-        return __DIR__.'/../../../../../web/'.$this->getUploadDir();
-    }
-
-    protected function getUploadDir()
-    {
-        // get rid of the __DIR__ so it doesn't screw when displaying uploaded doc/image in the view.
-        return 'uploads/documents';
-    }
-    
-    public function upload()
-    {
-        // the file property can be empty if the field is not required
-        if (null === $this->file) {
-            return;
-        }
-
-        // we use the original file name here but you should
-        // sanitize it at least to avoid any security issues
-
-        // move takes the target directory and then the target filename to move to
-        $this->file->move($this->getUploadRootDir(), $this->file->getClientOriginalName());
-
-        // set the path property to the filename where you'ved saved the file
-        $this->picture = $this->file->getClientOriginalName();
-
-        // clean up the file property as you won't need it anymore
-        $this->file = null;
+    static public function hydrateObject($userDB){
+        $user = new User();
+        $user->setUsername($userDB[0]['username']);
+        $user->setEmail($userDB[0]['email']);
+        $user->setPicture($userDB[0]['picture']);
+        $user->setLocation($userDB[0]['location']);
+        $user->setFirstName($userDB[0]['firstName']);
+        $user->setLastName($userDB[0]['lastName']);
+        $user->setBirthdate($userDB[0]['birthdate']);
+        $d = new \DateTime($userDB[0]['registeredAt'], new \DateTimeZone("Europe/Paris"));
+        $user->setRegisteredAt($d);
+        $user->setTwitterID($userDB[0]['twitterID']);
+        return $user;
     }
     
     public function getSocialButtons($network, $tweet_id)
     {
-    
-    	if($network == "f"){
-    	
-    		// for the social buttons at the bottom of the feed display
-    		$social_buttons='<div class="fb-like" data-href="http://blop.ca" data-send="true" data-layout="button_count" data-width="200" data-show-faces="true"></div>';
-    		
-    	}
-    	else if($network == "t"){
+        if($network == "f"){
+            // for the social buttons at the bottom of the feed display
+            $social_buttons='<div class="fb-like" data-href="http://blop.ca" data-send="true" data-layout="button_count" data-width="200" data-show-faces="true"></div>';
+        }
+        else if($network == "t"){
+            $t_reply = '<a class="t_reply" href="https://twitter.com/intent/tweet?in_reply_to='.$tweet_id.'"> </a>';
+            $t_fav = '<a class="t_favorite" href="https://twitter.com/intent/retweet?tweet_id='.$tweet_id.'"> </a>';
+            $t_retweet = '<a class="t_retweet" href="https://twitter.com/intent/favorite?tweet_id='.$tweet_id.'"> </a>';
+            $social_buttons = $t_reply . ' ' . $t_fav . ' ' . $t_retweet;
+        }
 
-    		$t_reply = '<a class="t_reply" href="https://twitter.com/intent/tweet?in_reply_to='.$tweet_id.'"> </a>';
-    		$t_fav = '<a class="t_favorite" href="https://twitter.com/intent/retweet?tweet_id='.$tweet_id.'"> </a>';
-    		$t_retweet = '<a class="t_retweet" href="https://twitter.com/intent/favorite?tweet_id='.$tweet_id.'"> </a>';
-    		$social_buttons = $t_reply . ' ' . $t_fav . ' ' . $t_retweet;
-    	}	
-    
-    	return $social_buttons;	
-    
+        return $social_buttons;
     }
 }

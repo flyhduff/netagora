@@ -6,9 +6,10 @@
    
    		<span class="subtitle">Your badges</span>
    
-   		<div id="badges">{% for badges, badge in badges %}
-   		<img src="{{badge|raw}}" />
-   		{% endfor %}
+   		<div id="badges">
+   			{% for badges, badge in badges %}
+				<img src="{{badge|raw}}" />
+			{% endfor %}
    		</div>
    
    </div>

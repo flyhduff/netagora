@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace ECE\Bundle\NetagoraBundle\Security\User\Provider;
 
@@ -9,30 +9,27 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\HttpFoundation\Session;
 use Symfony\Component\Validator\Validator;
 use FOS\UserBundle\Entity\UserManager;
-use \TwitterOAuth;
+use TwitterOAuth;
 
 class TwitterUserProvider implements UserProviderInterface
 {
-    /** 
-     * @var \Twitter
-     */
     protected $twitter;
     protected $userManager;
     protected $validator;
     protected $session;
 
-    public function __construct(\TwitterOAuth $twitter, UserManager $manager, Validator $validator, Session $session)
-    {   
+    public function __construct(TwitterOAuth $twitter, UserManager $manager, Validator $validator, Session $session)
+    {
         $this->twitter = $twitter;
         $this->manager = $manager;
         $this->validator = $validator;
         $this->session = $session;
-    }   
+    }
 
     public function supportsClass($class)
-    {   
+    {
         return $this->manager->supportsClass($class);
-    }   
+    }
 
     public function findUserByTwitterId($twitterID)
     {
@@ -68,8 +65,6 @@ class TwitterUserProvider implements UserProviderInterface
             $user->setUsername($username);
             $user->setEmail($username);
             $user->setFirstName($info->name);
-
-
 
             $this->manager->updateUser($user);
         }

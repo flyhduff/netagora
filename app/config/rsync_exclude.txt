@@ -8,4 +8,6 @@ app/config/parameters.ini
 app/cache/*
 app/logs/*
 web/app_dev.php
+web/beta_dev.php
 web/config.php
+beta/config/parameters.ini

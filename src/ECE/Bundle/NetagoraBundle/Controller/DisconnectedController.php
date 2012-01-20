@@ -3,115 +3,89 @@
 namespace ECE\Bundle\NetagoraBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use ECE\Bundle\NetagoraBundle\Entity\User;
 use ECE\Bundle\NetagoraBundle\Form\UserType;
-use Sensio\Bundle\BuzzBundle\DependencyInjection\SensioBuzzExtension;
 
 class DisconnectedController extends Controller
 {
-	/**
-	 * @Route("/Home")
-	 * @Template()
-	 */
-	 public function homeAction(){
-	 
-	 $name = 'home';
-	 return array('name' => $name);
-	 }
-	 
-	 /**
-	  * @Route("/About")
-	  * @Template()
-	  */
-	  public function aboutAction(){
-	  
-	  $name = 'about';
-	  return array('name' => $name);
-	  }
-	  
-	  /**
-	   * @Route("/Documentation")
-	   * @Template()
-	   */
-	   public function documentationAction(){
-	   
-	   $name = 'doc';
-	   return array('name' => $name);
-	   }
-	 
-
     /**
-     * @Route("/Subscribe")
+     * @Route("/Subscribe", name="subscribe")
      * @Template()
      */
-    public function subscribeAction()
+    public function subscribeAction(Request $request)
     {
-        /* Crawl de la page
-        $browser = new Buzz\Browser();
-        $response = $browser->get('http://bit.ly/aVUeDG');
-        //echo $browser->getJournal()->getLastRequest()."\n";
-        print_r($response->getHeader('Location'));
-        */
-        
-        $session = $this->getRequest()->getSession ();
-        $entity  = new User();
-        $request = $this->getRequest();
-        $form    = $this->createForm(new UserType(), $entity);
-        $form->bindRequest($request);
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getEntityManager();
-            $entity->setPassword(md5($entity->getPassword()));//Encode password in md5
-            $entity->setLastLogin(new \DateTime());
-            
-            $entity->upload();
-            
-            $em->persist($entity);
-            $em->flush();
-            //set session
-            $session -> set ( 'user_id' , $entity->getId() );
+        $user  = new User();
+        $form = $this->createForm(new UserType(), $user);
 
-            return $this->redirect($this->generateUrl('home', array('username' => $entity->getUsername())), 301);//permanent redirection
-            //return new Response ( 'response' );
-            
+        if ('POST' === $request->getMethod()) {
+            $form->bindRequest($request);
+            if ($form->isValid()) {
+                $factory = $this->get('security.encoder_factory');
+                $user->encodePassword($factory->getEncoder($user));
+                $user->target = $this->container->getParameter('photos_dir');
+
+                $em = $this->getDoctrine()->getEntityManager();
+                $em->persist($user);
+                $em->flush();
+
+                return $this->redirect($this->generateUrl('home'));
+            }
         }
 
-        return $this->render('ECENetagoraBundle:Disconnected:subscribe.html.twig', array(
-            'entity' => $entity,
-            'form'   => $form->createView()
-        ));
+        return array(
+            'user' => $user,
+            'form' => $form->createView(),
+        );
     }
     
     /**
-     * @Route("/Login")
+     * @Route("/menu_notlogged", name="login")
      * @Template()
      */
-    public function loginAction()
+    public function loginAction(Request $request)
     {
-        $name = 'login';
-        return array('name' => $name);
+        return array();
     }
     
     /**
-     * @Route("/PasswordRetrieval")
+     * @Route("/PasswordRetrieval", name="forgot")
      * @Template()
      */
-    public function passwordRetrievalAction()
+    public function passwordRetrievalAction(Request $request)
     {
-        $name = 'ForgotPassword';
-        return array('name' => $name);
+        $error = '';
+        $debug = '';
+
+        $email = $request->request->get('mail');
+        
+        //Find the user
+        $em = $this->getDoctrine()->getEntityManager();
+        if ($email) {
+            $user = $em->getRepository('ECENetagoraBundle:User')->findOneByEmail($email);
+        }
+        
+        if (!empty($user)) {
+            $message = \Swift_Message::newInstance()
+                    ->setSubject('Your access to netagora.net')
+                    ->setFrom(array('no-reply@netagora.net'=>'Netagora Team'))
+                    ->setTo($email)
+                    ->setBody('Hi '.$user->getFirstName().'!
+
+                    Your username is '.$user->getUsername().'
+                    Your password is '.$user->getPassword().'
+
+                    See you soon on www.netagora.net !
+
+                    The netagora team.
+                    ');
+            $this->get('mailer')->send($message);
+        } else if ($request->request->get('mail') != ''){
+            $error = 'Your account doesn\'t exist';
+        }
+        
+        return array('error'=>$error, 'debug' => $debug);
     }
-
-/**
- * @Route("/Message")
- * @Template()
- */
-public function messageAction()
-{
-    $message = 'Message';
-    return array('message' => $message);
-}
-
-
 }
